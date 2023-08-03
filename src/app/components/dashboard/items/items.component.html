@@ -1,0 +1,92 @@
+<div class="container">
+  <mat-toolbar>
+    <span>Items {{totalItem}}</span>
+    <div class="example-spacer"></div>
+
+    <div class="example-spacer"></div>
+    <div class="boton">
+      <button mat-raised-button color="primary" (click)="showDialogoAdd()" style="margin-right: 10px;">
+        <mat-icon>add</mat-icon>Add
+      </button>
+      <button mat-raised-button color="primary" (click)="showDialogoFilters()">
+        <mat-icon>search</mat-icon>Filters
+      </button>
+    </div>
+  </mat-toolbar>
+
+
+  <div class="mitabla">
+    <div class="mat-elevation-z8">
+      <table mat-table [dataSource]="dataSource" matSort>
+        <!--- Note that these columns can be defined in any order.
+                The actual rendered columns are set as a property on the row definition" -->
+
+       
+
+        <!-- Name Column -->
+        <ng-container matColumnDef="name">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header>Name</th>
+          <td mat-cell *matCellDef="let element">
+            {{ element.name }}
+          </td>
+        </ng-container>
+          <!-- Code Column -->
+        <ng-container matColumnDef="code">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header>Code</th>
+          <td mat-cell *matCellDef="let element">
+            {{ element.code }}
+          </td>
+        </ng-container>
+
+        <!-- Description Column -->
+        <ng-container matColumnDef="description">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header>Description</th>
+          <td mat-cell *matCellDef="let element">{{ element.description }}</td>
+        </ng-container>
+
+          <!-- Category Column -->
+        <ng-container matColumnDef="category">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header>Category</th>
+          <td mat-cell *matCellDef="let element">
+            {{ element.category }}
+          </td>
+        </ng-container>
+
+        <ng-container matColumnDef="acciones">
+          <th mat-header-cell *matHeaderCellDef></th>
+          <td mat-cell *matCellDef="let element" style="text-align: right">
+            <a
+              class="pointer"
+              (click)="editItem(element.id)"
+              style="color: #1f516f"
+              matTooltip="Editar "
+            >
+              <mat-icon>edit</mat-icon>
+            </a>
+            <a
+              class="pointer"
+              (click)="showDialogo(element.id)"
+              style="color: #e15639"
+              matTooltip="Eliminar "
+            >
+              <mat-icon>delete</mat-icon>
+            </a>
+          </td>
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+      </table>
+      <div class="botton">
+        <button mat-raised-button color="primary" (click)="Next()" [disabled]="!next">
+          <mat-icon>chevron_right</mat-icon>
+        </button>
+        <button mat-raised-button color="primary" (click)="Before()" [disabled]="!before">
+          <mat-icon>chevron_left</mat-icon>
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<br />

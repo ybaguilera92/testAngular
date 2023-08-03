@@ -1,0 +1,46 @@
+
+
+    <mat-toolbar>
+      <span *ngIf="!editar">Create Category</span>
+      <span *ngIf="editar">Edit Category</span>
+    </mat-toolbar>
+
+    <mat-card style="margin-top: 10px;" class="mat-elevation-z4">
+      <form [formGroup]="form" >
+        <mat-grid-list cols="4" rowHeight="70px">
+                  
+          <mat-grid-tile [colspan]="4" [rowspan]="1">
+            <mat-form-field class="ancho">
+              <mat-label>Name</mat-label>
+              <input matInput autocomplete="off" formControlName="name">
+               <mat-error *ngIf="form.get('name').hasError('required')">
+                 Name Required
+               </mat-error>
+              
+            </mat-form-field>
+          </mat-grid-tile>
+         
+         <mat-grid-tile [colspan]="4" [rowspan]="1">
+            <mat-form-field class="ancho">
+              <mat-label>Description</mat-label>
+              <textarea  matInput autocomplete="off" formControlName="description"></textarea>
+               <mat-error *ngIf="form.get('description').hasError('required')">
+                 Description Required
+               </mat-error>
+              
+            </mat-form-field>
+          </mat-grid-tile>
+
+          <mat-grid-tile [colspan]="4" [rowspan]="1">
+            <button mat-raised-button style="margin-right: 20px;"
+              (click)="cerrarDialogo()">Cancel</button>
+            <button type="submit" mat-raised-button color="primary"
+              [disabled]="form.invalid" (click)="editar ? saveCategory() :addCategory()">Accept</button>
+          </mat-grid-tile>
+        </mat-grid-list>
+
+        <br>
+
+      </form>
+    </mat-card>
+  

@@ -1,0 +1,64 @@
+import { Injectable } from '@angular/core';
+import {HttpClient, HttpErrorResponse, HttpHeaders, HttpParams} from '@angular/common/http';
+import { Observable, throwError } from 'rxjs';
+import { retry, catchError } from 'rxjs/operators';
+
+// @Injectable({
+//     providedIn: 'root'
+// })
+export class BaseService<T> {
+
+    constructor(
+        private httpClient: HttpClient,
+        private url: string,
+        private endpoint: string,
+    ) { }
+
+    httpOptions = {
+        headers: new HttpHeaders({ 'Content-Type': 'application/json' })
+    }
+
+    //#region [ Public ]
+    get(params): Observable<T[]> {
+        return this.httpClient
+            .post<T[]>(`${this.url}/${this.endpoint}/Search`, params)
+            .pipe(
+                retry(2),
+
+            )
+    }
+
+    getById(id: number): Observable<T> {
+        return this.httpClient
+            .post<T>(`${this.url}/${this.endpoint}/${id}`, this.httpOptions)
+            .pipe(
+                retry(2),
+
+            )
+    }
+
+    create(item: T): Observable<T> {
+        return this.httpClient.post<T>(`${this.url}/${this.endpoint}`, JSON.stringify(item), this.httpOptions)
+            .pipe(
+                retry(2),
+
+            )
+    }
+
+    update(item: T, parm: string): Observable<T> {
+        return this.httpClient.put<T>(`${this.url}/${this.endpoint}/${parm}/`, JSON.stringify(item), this.httpOptions)
+            .pipe(
+                retry(2),
+
+            )
+    }
+
+    delete(item: T) {
+        return this.httpClient.post<T>(`${this.url}/${this.endpoint}/${item}/Remove`, this.httpOptions)
+            .pipe(
+                retry(2),
+
+            )
+    }
+
+}

@@ -19,7 +19,6 @@ import { DialogFiltersComponent } from './dialog-filters/dialog-filters.componen
 })
 export class CategoriesComponent implements OnInit, OnDestroy {
   listCategory: any = [];
-  category: Category;
   objetoJson: any;
   id = localStorage.getItem('id');
   search = {
@@ -164,7 +163,6 @@ export class CategoriesComponent implements OnInit, OnDestroy {
   }
   async charge(index: any) {
     const c = await this._categoryService.getCategoryOne(index);
-    this.category = new Category(c.data);
   }
   error(error: string) {
     this._snackBar.open(error, '', {

@@ -11,7 +11,6 @@ import { DialogFiltersComponent } from './dialog-filters/dialog-filters.componen
 import { FormItemComponent } from './form-item/form-item.component';
 import { ItemService } from 'src/app/services/item.service';
 import { DialogConfirmComponent } from '../dialog-confirm/dialog-confirm.component';
-import { Item } from 'src/app/models/item';
 @Component({
   selector: 'app-categories',
   templateUrl: './items.component.html',
@@ -19,7 +18,6 @@ import { Item } from 'src/app/models/item';
 })
 export class ItemsComponent implements OnInit, OnDestroy {
   listCategory: any = [];
-  item: Item;
   objetoJson: any;
   id = localStorage.getItem('id');
   totalItem: any;
@@ -167,8 +165,7 @@ export class ItemsComponent implements OnInit, OnDestroy {
       });
   }
   async charge(index: any) {
-    const res = await this._itemService.getItemOne(index);
-    this.item = new Item(res.data);
+    await this._itemService.getItemOne(index);   
   }
   error(error: string) {
     this._snackBar.open(error, '', {

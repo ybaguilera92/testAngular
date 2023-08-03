@@ -1,4 +1,4 @@
-import { ActivatedRoute, Router } from '@angular/router';
+import { Router } from '@angular/router';
 
 import { FormGroup, FormBuilder, Validators, FormControl } from '@angular/forms';
 import { Component, OnInit, OnDestroy } from '@angular/core';
@@ -115,7 +115,7 @@ export class FormItemComponent implements OnInit, OnDestroy {
           if (res.message != "") {
             this.success(res.message);
           } else {            
-            this.success('Category updated successfully');
+            this.success('Item updated successfully');
           }
         },
         error: (err) => {
@@ -140,7 +140,7 @@ export class FormItemComponent implements OnInit, OnDestroy {
           if (res.message != "") {
             this.success(res.message);
           } else {
-            this.success('Category created successfully');
+            this.success('Item created successfully');
           }
 
         },

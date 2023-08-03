@@ -1,11 +1,8 @@
-import { Injectable } from '@angular/core';
-import {HttpClient, HttpErrorResponse, HttpHeaders, HttpParams} from '@angular/common/http';
-import { Observable, throwError } from 'rxjs';
-import { retry, catchError } from 'rxjs/operators';
+import {HttpClient, HttpHeaders} from '@angular/common/http';
+import { Observable } from 'rxjs';
+import { retry } from 'rxjs/operators';
 
-// @Injectable({
-//     providedIn: 'root'
-// })
+
 export class BaseService<T> {
 
     constructor(
@@ -18,7 +15,6 @@ export class BaseService<T> {
         headers: new HttpHeaders({ 'Content-Type': 'application/json' })
     }
 
-    //#region [ Public ]
     get(params): Observable<T[]> {
         return this.httpClient
             .post<T[]>(`${this.url}/${this.endpoint}/Search`, params)
@@ -28,7 +24,7 @@ export class BaseService<T> {
             )
     }
 
-    getById(id: number): Observable<T> {
+    getById(id: any): Observable<T> {
         return this.httpClient
             .post<T>(`${this.url}/${this.endpoint}/${id}`, this.httpOptions)
             .pipe(

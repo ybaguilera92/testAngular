@@ -114,8 +114,7 @@ export class CategoriesComponent implements OnInit, OnDestroy {
         }
       });
   }
-  showDialogAdd(): void {
-    this._categoryService.onCategoryChanged.next(null);
+  showDialogAdd(): void {   
     this.Dialog
       .open(FormCategoryComponent, {
         height: '43%',

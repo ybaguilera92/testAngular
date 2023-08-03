@@ -44,6 +44,7 @@ export class FormCategoryComponent implements OnInit, OnDestroy {
     this.editar = false;
     this._unsubscribeAll.next(null);
     this._unsubscribeAll.complete();
+    this._categoryService.onCategoryChanged.next(null);
   }
   cerrarDialogo(): void {
     this.dialogo.close(false);

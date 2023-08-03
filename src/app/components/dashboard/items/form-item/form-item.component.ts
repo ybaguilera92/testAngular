@@ -62,15 +62,21 @@ export class FormItemComponent implements OnInit, OnDestroy {
   ngOnDestroy() {
     this.editar = false;
     this._unsubscribeAll.next(null);
-    this._unsubscribeAll.complete();
+    this._unsubscribeAll.complete();  
+    this._itemService.onItemChanged.next(null);
   }
-  cerrarDialogo(): void {
+  closeDialog(): void {
     this.dialogo.close(false);
   }
 
   async ngOnInit() {
-    await this.chargeCategories();
-
+    if (!this.editar) { 
+      try {
+        await this.chargeCategories();
+      } catch (error) {
+        console.log('Error loading categories:', error);
+      }
+    }
   }
   async chargeCategories() {
     try {
@@ -108,7 +114,7 @@ export class FormItemComponent implements OnInit, OnDestroy {
         next: (res) => {
           if (res.message != "") {
             this.success(res.message);
-          } else {
+          } else {            
             this.success('Category updated successfully');
           }
         },

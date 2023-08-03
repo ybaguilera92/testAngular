@@ -39,7 +39,7 @@ export class ItemsComponent implements OnInit, OnDestroy {
     */
   constructor(private _itemService: ItemService,
     private _snackBar: MatSnackBar,
-    public dialogo: MatDialog) {
+    public Dialog: MatDialog) {
     this.dataSource = new MatTableDataSource<Category>();
     this.next = false;
     this.before = false;
@@ -98,8 +98,8 @@ export class ItemsComponent implements OnInit, OnDestroy {
       this.next = true;
     }
   }
-  showDialogo(index: any): void {
-    this.dialogo
+  showDialog(index: any): void {
+    this.Dialog
       .open(DialogConfirmComponent, {
         data: `Are you sure you want to delete the item?`
       })
@@ -110,8 +110,8 @@ export class ItemsComponent implements OnInit, OnDestroy {
         }
       });
   }
-  showDialogoFilters(): void {
-    this.dialogo
+  showDialogFilters(): void {
+    this.Dialog
       .open(DialogFiltersComponent, {
         height: '35%',
         width: '25%',
@@ -123,9 +123,8 @@ export class ItemsComponent implements OnInit, OnDestroy {
         }
       });
   }
-  showDialogoAdd(): void {
-    this._itemService.onItemChanged.next(null);
-    this.dialogo
+  showDialogAdd(): void {
+    this.Dialog
       .open(FormItemComponent, {
         height: '50%',
         width: '70%',
@@ -145,19 +144,20 @@ export class ItemsComponent implements OnInit, OnDestroy {
           this.error(res.message);
         },
         error: (err) => {
-            this.error(err.error.message);
+          this.error(err.error.message);
         }
       });
   }
+
   ngAfterViewInit() {
     this.dataSource.sort = this.sort;
   }
 
   async editItem(index: any) {
     await this.charge(index);
-    this.dialogo
+    this.Dialog
       .open(FormItemComponent, {
-        height: '55%',
+        height: '50%',
         width: '60%',
       }).afterClosed()
       .subscribe((saveItem: Boolean) => {

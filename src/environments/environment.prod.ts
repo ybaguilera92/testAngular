@@ -1,7 +1,5 @@
 export const environment = {
   production: true,
   hmr: false,
-  apiUrl: "http://localhost:8080/api",
-  appUrl: "http://localhost:4200"
-  //apiUrl: "http://192.168.1.134:8080/api"
+  apiUrl: "https://3q8pjz0cpl.execute-api.us-east-1.amazonaws.com/api"
 };

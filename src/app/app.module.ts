@@ -15,6 +15,7 @@ import { EnviromentsService } from './services/enviroments.service';
 import { EncryptionService } from './services/encryption.service';
 import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
+import { HashLocationStrategy, LocationStrategy } from '@angular/common';
 
 
 export function HttpLoaderFactory(http: HttpClient) {
@@ -44,6 +45,7 @@ export function HttpLoaderFactory(http: HttpClient) {
 
   ],
   providers: [
+    { provide: LocationStrategy, useClass: HashLocationStrategy },
     EnviromentsService,
     EncryptionService
   
